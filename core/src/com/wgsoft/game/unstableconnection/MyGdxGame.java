@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,6 +19,9 @@ public final class MyGdxGame extends Game {
     private Skin skin;
 
     private Music music;
+
+    private Sound leverOnSound;
+    private Sound leverOffSound;
 
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
@@ -53,6 +57,15 @@ public final class MyGdxGame extends Game {
             music.setLooping(true);
             music.play();
         }
+
+        if(leverOnSound == null) {
+            leverOnSound =
+                Gdx.audio.newSound(Gdx.files.internal("snd/lever-on.wav"));
+        }
+        if(leverOffSound == null) {
+            leverOffSound =
+                Gdx.audio.newSound(Gdx.files.internal("snd/lever-off.wav"));
+        }
     }
 
     @Override
@@ -71,6 +84,13 @@ public final class MyGdxGame extends Game {
 
         if(music != null) {
             music.dispose();
+        }
+
+        if(leverOnSound != null) {
+            leverOnSound.dispose();
+        }
+        if(leverOffSound != null) {
+            leverOffSound.dispose();
         }
 
         menuScreen.dispose();
@@ -102,5 +122,13 @@ public final class MyGdxGame extends Game {
 
     public Skin getSkin() {
         return skin;
+    }
+
+    public void playLeverOnSound() {
+        leverOnSound.play();
+    }
+
+    public void playLeverOffSound() {
+        leverOffSound.play();
     }
 }

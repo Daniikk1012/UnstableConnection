@@ -142,6 +142,11 @@ public final class GameScreen extends ScreenAdapter {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 group.power = checkBox.isChecked();
+                if(checkBox.isChecked()) {
+                    game.playLeverOnSound();
+                } else {
+                    game.playLeverOffSound();
+                }
             }
         });
         return checkBox;
