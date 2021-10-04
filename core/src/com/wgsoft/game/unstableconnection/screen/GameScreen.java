@@ -92,22 +92,20 @@ public final class GameScreen extends ScreenAdapter {
         stage.addActor(timeLabel);
 
         phoneGroup = new DeviceGroup(
-            game.getSkin(), "phone", phoneButton, 35f, 10f, 30f, 53f);
+            game, "phone", phoneButton, 35f, 10f, 30f, 53f);
         stage.addActor(phoneGroup);
 
         tabletGroup = new DeviceGroup(
-            game.getSkin(), "tablet", tabletButton, 20f, 14f, 58f, 42f);
+            game, "tablet", tabletButton, 20f, 14f, 58f, 42f);
         stage.addActor(tabletGroup);
 
-        tvGroup = new DeviceGroup(
-            game.getSkin(), "tv", tvButton, 6f, 10f, 88f, 55f);
+        tvGroup = new DeviceGroup(game, "tv", tvButton, 6f, 10f, 88f, 55f);
         stage.addActor(tvGroup);
 
-        pcGroup = new DeviceGroup(
-            game.getSkin(), "pc", pcButton, 6f, 14f, 88f, 41f);
+        pcGroup = new DeviceGroup(game, "pc", pcButton, 6f, 14f, 88f, 41f);
         stage.addActor(pcGroup);
 
-        shieldGroup = new DeviceGroup(game.getSkin(), "shield", shieldButton);
+        shieldGroup = new DeviceGroup(game, "shield", shieldButton);
 
         tvShieldCheckBox = createShieldCheckBox(5f, tvGroup);
         shieldGroup.addActor(tvShieldCheckBox);

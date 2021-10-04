@@ -22,6 +22,7 @@ public final class MyGdxGame extends Game {
 
     private Sound leverOnSound;
     private Sound leverOffSound;
+    private Sound wifiOnSound;
 
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
@@ -66,6 +67,10 @@ public final class MyGdxGame extends Game {
             leverOffSound =
                 Gdx.audio.newSound(Gdx.files.internal("snd/lever-off.wav"));
         }
+        if(wifiOnSound == null) {
+            wifiOnSound =
+                Gdx.audio.newSound(Gdx.files.internal("snd/wifi-on.wav"));
+        }
     }
 
     @Override
@@ -91,6 +96,9 @@ public final class MyGdxGame extends Game {
         }
         if(leverOffSound != null) {
             leverOffSound.dispose();
+        }
+        if(wifiOnSound != null) {
+            wifiOnSound.dispose();
         }
 
         menuScreen.dispose();
@@ -130,5 +138,9 @@ public final class MyGdxGame extends Game {
 
     public void playLeverOffSound() {
         leverOffSound.play();
+    }
+
+    public void playWifiOnSound() {
+        wifiOnSound.play();
     }
 }

@@ -8,14 +8,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.wgsoft.game.unstableconnection.MyGdxGame;
 
 public final class DeviceGroup extends WidgetGroup {
-    private final Skin skin;
+    private final MyGdxGame game;
 
     private final Image blackImage;
 
@@ -28,18 +28,21 @@ public final class DeviceGroup extends WidgetGroup {
     private boolean mistaken;
     private boolean completed;
 
-    public DeviceGroup(final Skin skin, final String name, final Button button)
-    {
-        this.skin = skin;
+    public DeviceGroup(
+        final MyGdxGame game,
+        final String name,
+        final Button button
+    ) {
+        this.game = game;
 
         setFillParent(true);
         setVisible(false);
         setTouchable(Touchable.childrenOnly);
 
-        blackImage = new Image(skin, "black");
+        blackImage = new Image(game.getSkin(), "black");
         blackImage.setFillParent(true);
 
-        final Button blurButton = new Button(skin, "blur");
+        final Button blurButton = new Button(game.getSkin(), "blur");
         blurButton.setFillParent(true);
         blurButton.addListener(new ChangeListener(){
             @Override
@@ -56,7 +59,7 @@ public final class DeviceGroup extends WidgetGroup {
         });
         addActor(blurButton);
 
-        final Image image = new Image(skin, name);
+        final Image image = new Image(game.getSkin(), name);
         image.setFillParent(true);
         image.setTouchable(Touchable.disabled);
         addActor(image);
@@ -77,7 +80,7 @@ public final class DeviceGroup extends WidgetGroup {
     }
 
     public DeviceGroup(
-        final Skin skin,
+        final MyGdxGame game,
         final String name,
         final Button button,
         final float x,
@@ -85,7 +88,7 @@ public final class DeviceGroup extends WidgetGroup {
         final float width,
         final float height
     ) {
-        this(skin, name, button);
+        this(game, name, button);
 
         final Stack stack = new Stack();
         stack.setBounds(x, y, width, height);
@@ -93,39 +96,41 @@ public final class DeviceGroup extends WidgetGroup {
         final Table table = new Table();
         table.top();
 
-        wifiImage = new Image(skin, "wifi");
+        wifiImage = new Image(game.getSkin(), "wifi");
         table.add(wifiImage).size(7f, 8f);
-refreshButton = new Button(skin, "refresh");
+        refreshButton = new Button(game.getSkin(), "refresh");
         refreshButton.setVisible(false);
         table.add(refreshButton).size(10f);
 
         table.add().expandX();
 
         final ProgressBar batteryBar =
-            new ProgressBar(0f, 10f, 1f, false, skin, "battery");
+            new ProgressBar(0f, 10f, 1f, false, game.getSkin(), "battery");
         batteryBar.setValue(batteryBar.getMaxValue());
         table.add(batteryBar).size(13f, 8f);
 
         stack.add(table);
 
-        pauseImage = new Image(skin, "pause");
+        pauseImage = new Image(game.getSkin(), "pause");
         refreshButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                wifiImage.setDrawable(skin, "wifi");
+                game.playWifiOnSound();
+                wifiImage.setDrawable(game.getSkin(), "wifi");
                 refreshButton.setVisible(false);
                 pauseImage.setVisible(false);
             }
         });
 
-        downloadBar = new ProgressBar(0f, 100f, 1f, false, skin, "download");
+        downloadBar =
+            new ProgressBar(0f, 100f, 1f, false, game.getSkin(), "download");
         downloadBar.addAction(
             Actions.forever(Actions.delay(3f, Actions.run(() -> {
                 if(!completed) {
                     if(!pauseImage.isVisible()) {
                         mistaken = false;
                         if(MathUtils.randomBoolean(0.01f)) {
-                            wifiImage.setDrawable(skin, "wifi-lost");
+                            wifiImage.setDrawable(game.getSkin(), "wifi-lost");
                             refreshButton.setVisible(true);
                             pauseImage.setVisible(true);
                         } else {
@@ -152,7 +157,7 @@ refreshButton = new Button(skin, "refresh");
         stack.add(new Container<>(pauseImage).size(30f, 20f));
         pauseImage.setVisible(false);
 
-        final Image offImage = new Image(skin, "black");
+        final Image offImage = new Image(game.getSkin(), "black");
         offImage.setVisible(false);
         batteryBar.addAction(
             Actions.forever(Actions.delay(1f, Actions.run(() -> {
@@ -180,7 +185,7 @@ refreshButton = new Button(skin, "refresh");
         setVisible(false);
 
         if(wifiImage != null) {
-            wifiImage.setDrawable(skin, "wifi");
+            wifiImage.setDrawable(game.getSkin(), "wifi");
         }
         if(wifiImage != null) {
             refreshButton.setVisible(false);
