@@ -1,0 +1,111 @@
+{
+  "Color": {
+    "transparent": {
+      "hex": "#00000000"
+    },
+    "highlight": {
+      "hex": "#ffffff66"
+    },
+    "battery-filler": {
+      "hex": "#76ff03"
+    },
+    "download-filler": {
+      "hex": "#000000"
+    },
+    "black": {
+      "hex": "#000000"
+    },
+    "slider-filler": {
+      "hex": "#000000"
+    }
+  },
+  "TintedDrawable": {
+    "transparent": {
+      "color": "transparent",
+      "name": "pixel"
+    },
+    "highlight": {
+      "color": "highlight",
+      "name": "pixel"
+    },
+    "battery-filler": {
+      "color": "battery-filler",
+      "name": "pixel"
+    },
+    "download-filler": {
+      "color": "download-filler",
+      "name": "pixel"
+    },
+    "black": {
+      "color": "black",
+      "name": "pixel"
+    },
+    "slider-filler": {
+      "color": "slider-filler",
+      "name": "pixel"
+    }
+  },
+  "BitmapFont": {
+    "press-start-medium": {
+      "file": "fnt/press-start.fnt",
+      "scaledSize": 4
+    },
+    "press-start-large": {
+      "file": "fnt/press-start.fnt",
+      "scaledSize": 5
+    }
+  },
+  "LabelStyle": {
+    "press-start-medium": {
+      "font": "press-start-medium"
+    },
+    "press-start-large": {
+      "font": "press-start-large",
+      "fontColor": "black"
+    }
+  },
+  "ButtonStyle": {
+    "highlight": {
+      "up": "transparent",
+      "down": "highlight",
+      "over": "highlight"
+    },
+    "blur": {
+      "up": "highlight"
+    },
+    "refresh": {
+      "up": "refresh"
+    }
+  },
+  "CheckBoxStyle": {
+    "lever": {
+      "checkboxOn": "lever-on",
+      "checkboxOff": "lever-off",
+      "font": "press-start-medium"
+    }
+  },
+  "ProgressBarStyle": {
+    "battery": {
+      "background": "battery",
+      "knobBefore": "battery-filler"
+    },
+    "download": {
+      "background": "download",
+      "knobBefore": "download-filler"
+    }
+  },
+  "TextButtonStyle": {
+    "menu": {
+      "up": "button",
+      "down": "button-pressed",
+      "font": "press-start-medium",
+      "fontColor": "black"
+    }
+  },
+  "SliderStyle": {
+    "slider": {
+      "background": "slider",
+      "knobBefore": "slider-filler"
+    }
+  }
+}
