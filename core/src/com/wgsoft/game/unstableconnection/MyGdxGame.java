@@ -206,7 +206,7 @@ public final class MyGdxGame extends Game {
 
     public void playShieldCloseSound() {
         shieldCloseSound.play(
-            getFloatPreference("sound", Constants.SOUND_DEFAULT)
+            getFloatPreference("sound", Constants.SOUND_DEFAULT) / 100f
         );
     }
 }
