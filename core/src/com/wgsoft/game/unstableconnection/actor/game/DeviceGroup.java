@@ -55,6 +55,9 @@ public final class DeviceGroup extends WidgetGroup {
                     Actions.alpha(0f, 0.25f),
                     Actions.removeActor()
                 ));
+                if(name.equals("shield")) {
+                    game.playShieldCloseSound();
+                }
             }
         });
         addActor(blurButton);
@@ -75,6 +78,9 @@ public final class DeviceGroup extends WidgetGroup {
                     Actions.alpha(0f, 0.25f),
                     Actions.removeActor()
                 ));
+                if(name.equals("shield")) {
+                    game.playShieldOpenSound();
+                }
             }
         });
     }

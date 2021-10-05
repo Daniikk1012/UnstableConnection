@@ -23,6 +23,8 @@ public final class MyGdxGame extends Game {
     private Sound leverOnSound;
     private Sound leverOffSound;
     private Sound wifiOnSound;
+    private Sound shieldOpenSound;
+    private Sound shieldCloseSound;
 
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
@@ -71,6 +73,14 @@ public final class MyGdxGame extends Game {
             wifiOnSound =
                 Gdx.audio.newSound(Gdx.files.internal("snd/wifi-on.wav"));
         }
+        if(shieldOpenSound == null) {
+            shieldOpenSound =
+                Gdx.audio.newSound(Gdx.files.internal("snd/shield-open.wav"));
+        }
+        if(shieldCloseSound == null) {
+            shieldCloseSound =
+                Gdx.audio.newSound(Gdx.files.internal("snd/shield-close.wav"));
+        }
     }
 
     @Override
@@ -99,6 +109,12 @@ public final class MyGdxGame extends Game {
         }
         if(wifiOnSound != null) {
             wifiOnSound.dispose();
+        }
+        if(shieldOpenSound != null) {
+            shieldOpenSound.dispose();
+        }
+        if(shieldCloseSound != null) {
+            shieldCloseSound.dispose();
         }
 
         menuScreen.dispose();
@@ -142,5 +158,13 @@ public final class MyGdxGame extends Game {
 
     public void playWifiOnSound() {
         wifiOnSound.play();
+    }
+
+    public void playShieldOpenSound() {
+        shieldOpenSound.play();
+    }
+
+    public void playShieldCloseSound() {
+        shieldCloseSound.play();
     }
 }
