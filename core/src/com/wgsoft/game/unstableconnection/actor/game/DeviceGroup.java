@@ -135,7 +135,7 @@ public final class DeviceGroup extends WidgetGroup {
                 if(!completed) {
                     if(!pauseImage.isVisible()) {
                         mistaken = false;
-                        if(MathUtils.randomBoolean(0.01f)) {
+                        if(MathUtils.randomBoolean(0.02f)) {
                             wifiImage.setDrawable(game.getSkin(), "wifi-lost");
                             refreshButton.setVisible(true);
                             pauseImage.setVisible(true);
