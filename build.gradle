@@ -35,7 +35,7 @@ task generateResources {
 
 allprojects {
     apply plugin: "eclipse"
-    version = '0.1'
+    version = '0.2'
     ext {
         appName = "Unstable Connection"
         roboVMVersion = '2.3.12'
