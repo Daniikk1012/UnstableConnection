@@ -6,18 +6,18 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.wgsoft.game.unstableconnection.Constants;
 import com.wgsoft.game.unstableconnection.MyGdxGame;
 
-public final class MenuScreen extends ScreenAdapter {
+public final class SettingsScreen extends ScreenAdapter {
     private final Stage stage;
 
-    public MenuScreen(final MyGdxGame game) {
+    public SettingsScreen(final MyGdxGame game) {
         stage = new Stage(
             new FitViewport(Constants.WIDTH, Constants.HEIGHT),
             game.getSpriteBatch()
@@ -29,57 +29,58 @@ public final class MenuScreen extends ScreenAdapter {
         stage.addActor(backgroundImage);
 
         final Image blurImage = new Image(game.getSkin(), "highlight");
-        blurImage.setFillParent(true);
+        blurImage.setFillParent(true);;
         stage.addActor(blurImage);
 
         final Table table = new Table();
         table.setFillParent(true);
 
-        final Label titleLabel = new Label(
-            "UNSTABLE\nCONNECTION",
-            game.getSkin(),
-            "press-start-large"
+        table.add(new Label("Sounds", game.getSkin(), "press-start-medium"));
+
+        final Slider soundSlider =
+            new Slider(0f, 100f, 5f, false, game.getSkin(), "slider");
+        soundSlider.setValue(
+            game.getFloatPreference("sound", Constants.SOUND_DEFAULT)
         );
-        titleLabel.setAlignment(Align.center);
-        table.add(titleLabel).pad(1f);
+        table.add(soundSlider).width(22f).pad(1f);
 
         table.row();
 
-        final TextButton startButton =
-            new TextButton("Start", game.getSkin(), "menu");
-        startButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.initSounds();
-                game.setGameScreen();
-            }
-        });
-        table.add(startButton).pad(1f);
+        table.add(new Label("Music", game.getSkin(), "press-start-medium"));
+
+        final Slider musicSlider =
+            new Slider(0f, 100f, 5f, false, game.getSkin(), "slider");
+        musicSlider.setValue(
+            game.getFloatPreference("music", Constants.MUSIC_DEFAULT)
+        );
+        table.add(musicSlider).width(22f).pad(1f);
 
         table.row();
 
-        final TextButton settingsButton =
-            new TextButton("Settings", game.getSkin(), "menu");
-        settingsButton.addListener(new ChangeListener() {
+        final TextButton applyButton =
+            new TextButton("Apply", game.getSkin(), "menu");
+        applyButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.initSounds();
-                game.setSettingsScreen();
+                game.setFloatPreference("sound", soundSlider.getValue());
+                game.setFloatPreference("music", musicSlider.getValue());
+                game.flushPreferences();
+                game.updateMusic();
             }
         });
-        table.add(settingsButton).pad(1f);
+        table.add(applyButton).pad(1f);
 
         table.row();
 
-        final TextButton exitButton =
-            new TextButton("Exit", game.getSkin(), "menu");
-        exitButton.addListener(new ChangeListener() {
+        final TextButton backButton =
+            new TextButton("Back", game.getSkin(), "menu");
+        backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
+                game.setMenuScreen();
             }
         });
-        table.add(exitButton).pad(1f);
+        table.add(backButton).pad(1f);
 
         stage.addActor(table);
     }
@@ -90,7 +91,7 @@ public final class MenuScreen extends ScreenAdapter {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         stage.act(delta);
         stage.draw();
     }

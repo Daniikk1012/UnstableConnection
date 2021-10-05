@@ -14,6 +14,9 @@
     },
     "black": {
       "hex": "#000000"
+    },
+    "slider-filler": {
+      "hex": "#000000"
     }
   },
   "TintedDrawable": {
@@ -35,6 +38,10 @@
     },
     "black": {
       "color": "black",
+      "name": "pixel"
+    },
+    "slider-filler": {
+      "color": "slider-filler",
       "name": "pixel"
     }
   },
@@ -93,6 +100,12 @@
       "down": "button-pressed",
       "font": "press-start-medium",
       "fontColor": "black"
+    }
+  },
+  "SliderStyle": {
+    "slider": {
+      "background": "slider",
+      "knobBefore": "slider-filler"
     }
   }
 }

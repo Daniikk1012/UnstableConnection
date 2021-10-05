@@ -2,6 +2,7 @@ package com.wgsoft.game.unstableconnection;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -12,11 +13,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.wgsoft.game.unstableconnection.screen.GameOverScreen;
 import com.wgsoft.game.unstableconnection.screen.GameScreen;
 import com.wgsoft.game.unstableconnection.screen.MenuScreen;
+import com.wgsoft.game.unstableconnection.screen.SettingsScreen;
 
 public final class MyGdxGame extends Game {
     private SpriteBatch spriteBatch;
 
     private Skin skin;
+
+    private Preferences preferences;
 
     private Music music;
 
@@ -29,12 +33,14 @@ public final class MyGdxGame extends Game {
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
     private GameOverScreen gameOverScreen;
+    private SettingsScreen settingsScreen;
 
     @Override
-    public void create () {
-        spriteBatch = new SpriteBatch();
-
+    public void create () { spriteBatch = new SpriteBatch();
         skin = new Skin(Gdx.files.internal("img/skin.json"));
+
+        preferences =
+            Gdx.app.getPreferences("com.wgsoft.game.unstableconnection");
 
         for(final BitmapFont font: skin.getAll(BitmapFont.class).values()) {
             font.setUseIntegerPositions(false);
@@ -42,6 +48,7 @@ public final class MyGdxGame extends Game {
 
         skin.getDrawable("battery-filler").setMinHeight(6f);
         skin.getDrawable("download-filler").setMinHeight(6f);
+        skin.getDrawable("slider-filler").setMinHeight(6f);
 
         if(Gdx.app.getType() != ApplicationType.WebGL) {
             initSounds();
@@ -50,6 +57,7 @@ public final class MyGdxGame extends Game {
         menuScreen = new MenuScreen(this);
         gameScreen = new GameScreen(this);
         gameOverScreen = new GameOverScreen(this);
+        settingsScreen = new SettingsScreen(this);
 
         setMenuScreen();
     }
@@ -58,6 +66,7 @@ public final class MyGdxGame extends Game {
         if(music == null) {
             music = Gdx.audio.newMusic(Gdx.files.internal("snd/music.mp3"));
             music.setLooping(true);
+            updateMusic();
             music.play();
         }
 
@@ -120,6 +129,7 @@ public final class MyGdxGame extends Game {
         menuScreen.dispose();
         gameScreen.dispose();
         gameOverScreen.dispose();
+        settingsScreen.dispose();
     }
 
     public void setMenuScreen() {
@@ -140,6 +150,10 @@ public final class MyGdxGame extends Game {
         setScreen(gameOverScreen);
     }
 
+    public void setSettingsScreen() {
+        setScreen(settingsScreen);
+    }
+
     public SpriteBatch getSpriteBatch() {
         return spriteBatch;
     }
@@ -148,23 +162,51 @@ public final class MyGdxGame extends Game {
         return skin;
     }
 
+    public void setFloatPreference(final String name, final float value) {
+        preferences.putFloat(name, value);
+    }
+
+    public float getFloatPreference(final String name, final float def) {
+        return preferences.getFloat(name, def);
+    }
+    
+    public void flushPreferences() {
+        preferences.flush();
+    }
+
+    public void updateMusic() {
+        music.setVolume(
+            getFloatPreference("music", Constants.MUSIC_DEFAULT) / 100f
+        );
+    }
+
     public void playLeverOnSound() {
-        leverOnSound.play();
+        leverOnSound.play(
+            getFloatPreference("sound", Constants.SOUND_DEFAULT) / 100f
+        );
     }
 
     public void playLeverOffSound() {
-        leverOffSound.play();
+        leverOffSound.play(
+            getFloatPreference("sound", Constants.SOUND_DEFAULT) / 100f
+        );
     }
 
     public void playWifiOnSound() {
-        wifiOnSound.play();
+        wifiOnSound.play(
+            getFloatPreference("sound", Constants.SOUND_DEFAULT) / 100f
+        );
     }
 
     public void playShieldOpenSound() {
-        shieldOpenSound.play();
+        shieldOpenSound.play(
+            getFloatPreference("sound", Constants.SOUND_DEFAULT) / 100f
+        );
     }
 
     public void playShieldCloseSound() {
-        shieldCloseSound.play();
+        shieldCloseSound.play(
+            getFloatPreference("sound", Constants.SOUND_DEFAULT)
+        );
     }
 }
