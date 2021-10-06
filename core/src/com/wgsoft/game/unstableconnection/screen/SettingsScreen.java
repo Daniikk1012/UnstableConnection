@@ -1,6 +1,7 @@
 package com.wgsoft.game.unstableconnection.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,6 +17,8 @@ import com.wgsoft.game.unstableconnection.MyGdxGame;
 
 public final class SettingsScreen extends ScreenAdapter {
     private final Stage stage;
+
+    private Screen fromScreen;
 
     public SettingsScreen(final MyGdxGame game) {
         stage = new Stage(
@@ -77,12 +80,16 @@ public final class SettingsScreen extends ScreenAdapter {
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setMenuScreen();
+                game.setScreen(fromScreen);
             }
         });
         table.add(backButton).pad(1f);
 
         stage.addActor(table);
+    }
+
+    public void setFromScreen(Screen fromScreen) {
+        this.fromScreen = fromScreen;
     }
 
     @Override

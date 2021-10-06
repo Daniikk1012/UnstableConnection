@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.wgsoft.game.unstableconnection.screen.GameOverScreen;
 import com.wgsoft.game.unstableconnection.screen.GameScreen;
 import com.wgsoft.game.unstableconnection.screen.MenuScreen;
+import com.wgsoft.game.unstableconnection.screen.PauseScreen;
 import com.wgsoft.game.unstableconnection.screen.SettingsScreen;
 
 public final class MyGdxGame extends Game {
@@ -34,6 +35,7 @@ public final class MyGdxGame extends Game {
     private GameScreen gameScreen;
     private GameOverScreen gameOverScreen;
     private SettingsScreen settingsScreen;
+    private PauseScreen pauseScreen;
 
     @Override
     public void create () { spriteBatch = new SpriteBatch();
@@ -58,6 +60,7 @@ public final class MyGdxGame extends Game {
         gameScreen = new GameScreen(this);
         gameOverScreen = new GameOverScreen(this);
         settingsScreen = new SettingsScreen(this);
+        pauseScreen = new PauseScreen(this);
 
         setMenuScreen();
     }
@@ -130,6 +133,7 @@ public final class MyGdxGame extends Game {
         gameScreen.dispose();
         gameOverScreen.dispose();
         settingsScreen.dispose();
+        pauseScreen.dispose();
     }
 
     public void setMenuScreen() {
@@ -137,6 +141,9 @@ public final class MyGdxGame extends Game {
     }
 
     public void setGameScreen() {
+        if(getScreen() == menuScreen) {
+            gameScreen.reset();
+        }
         setScreen(gameScreen);
     }
 
@@ -151,7 +158,12 @@ public final class MyGdxGame extends Game {
     }
 
     public void setSettingsScreen() {
+        settingsScreen.setFromScreen(getScreen());
         setScreen(settingsScreen);
+    }
+
+    public void setPauseScreen() {
+        setScreen(pauseScreen);
     }
 
     public SpriteBatch getSpriteBatch() {

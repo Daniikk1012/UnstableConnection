@@ -91,6 +91,16 @@ public final class GameScreen extends ScreenAdapter {
         }));
         stage.addActor(timeLabel);
 
+        final Button pauseButton = new Button(game.getSkin(), "pause");
+        pauseButton.setBounds(0f, 0f, 8f, 8f);
+        pauseButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setPauseScreen();
+            }
+        });
+        stage.addActor(pauseButton);
+
         phoneGroup = new DeviceGroup(
             game, "phone", phoneButton, 35f, 10f, 30f, 53f);
         stage.addActor(phoneGroup);
@@ -160,10 +170,7 @@ public final class GameScreen extends ScreenAdapter {
         }
     }
 
-    @Override
-    public void show() {
-        Gdx.input.setInputProcessor(stage);
-
+    public void reset() {
         time = 7f * 60f;
 
         phoneGroup.reset();
@@ -176,6 +183,11 @@ public final class GameScreen extends ScreenAdapter {
         pcShieldCheckBox.setChecked(true);
         phoneShieldCheckBox.setChecked(true);
         tabletShieldCheckBox.setChecked(true);
+    }
+
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

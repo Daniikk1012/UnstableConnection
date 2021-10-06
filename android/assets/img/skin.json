@@ -75,6 +75,11 @@
     },
     "refresh": {
       "up": "refresh"
+    },
+    "pause": {
+      "up": "pause-button",
+      "over": "pause-button-pressed",
+      "down": "pause-button-pressed"
     }
   },
   "CheckBoxStyle": {
