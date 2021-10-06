@@ -49,7 +49,7 @@ public final class MenuScreen extends ScreenAdapter {
             new TextButton("Start", game.getSkin(), "menu");
         startButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.initSounds();
                 game.setGameScreen();
             }
@@ -62,7 +62,7 @@ public final class MenuScreen extends ScreenAdapter {
             new TextButton("Settings", game.getSkin(), "menu");
         settingsButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.initSounds();
                 game.setSettingsScreen();
             }
@@ -75,7 +75,7 @@ public final class MenuScreen extends ScreenAdapter {
             new TextButton("Exit", game.getSkin(), "menu");
         exitButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 Gdx.app.exit();
             }
         });
@@ -90,13 +90,13 @@ public final class MenuScreen extends ScreenAdapter {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         stage.act(delta);
         stage.draw();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 

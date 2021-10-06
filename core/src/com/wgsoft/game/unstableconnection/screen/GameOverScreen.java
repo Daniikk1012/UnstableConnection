@@ -45,7 +45,7 @@ public final class GameOverScreen extends ScreenAdapter {
             new TextButton("Go to menu", game.getSkin(), "menu");
         menuButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setMenuScreen();
             }
         });
@@ -68,13 +68,13 @@ public final class GameOverScreen extends ScreenAdapter {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(final float delta) {
         stage.act(delta);
         stage.draw();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 

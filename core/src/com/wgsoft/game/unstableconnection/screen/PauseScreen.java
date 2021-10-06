@@ -37,7 +37,7 @@ public final class PauseScreen extends ScreenAdapter {
             new TextButton("Continue", game.getSkin(), "menu");
         continueButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setGameScreen();
             }
         });
@@ -49,7 +49,7 @@ public final class PauseScreen extends ScreenAdapter {
             new TextButton("Settings", game.getSkin(), "menu");
         settingsButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setSettingsScreen();
             }
         });
@@ -61,7 +61,7 @@ public final class PauseScreen extends ScreenAdapter {
             new TextButton("Exit", game.getSkin(), "menu");
         exitButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setMenuScreen();
             }
         });
@@ -82,7 +82,7 @@ public final class PauseScreen extends ScreenAdapter {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 

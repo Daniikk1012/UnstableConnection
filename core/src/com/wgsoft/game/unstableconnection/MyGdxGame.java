@@ -38,7 +38,9 @@ public final class MyGdxGame extends Game {
     private PauseScreen pauseScreen;
 
     @Override
-    public void create () { spriteBatch = new SpriteBatch();
+    public void create () {
+        spriteBatch = new SpriteBatch();
+
         skin = new Skin(Gdx.files.internal("img/skin.json"));
 
         preferences =

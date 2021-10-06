@@ -64,7 +64,7 @@ public final class SettingsScreen extends ScreenAdapter {
             new TextButton("Apply", game.getSkin(), "menu");
         applyButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setFloatPreference("sound", soundSlider.getValue());
                 game.setFloatPreference("music", musicSlider.getValue());
                 game.flushPreferences();
@@ -79,7 +79,7 @@ public final class SettingsScreen extends ScreenAdapter {
             new TextButton("Back", game.getSkin(), "menu");
         backButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setScreen(fromScreen);
             }
         });
@@ -88,7 +88,7 @@ public final class SettingsScreen extends ScreenAdapter {
         stage.addActor(table);
     }
 
-    public void setFromScreen(Screen fromScreen) {
+    public void setFromScreen(final Screen fromScreen) {
         this.fromScreen = fromScreen;
     }
 
@@ -104,7 +104,7 @@ public final class SettingsScreen extends ScreenAdapter {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 

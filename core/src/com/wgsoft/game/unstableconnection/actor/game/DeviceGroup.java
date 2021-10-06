@@ -46,7 +46,7 @@ public final class DeviceGroup extends WidgetGroup {
         blurButton.setFillParent(true);
         blurButton.addListener(new ChangeListener(){
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 getStage().addActor(blackImage);
                 blackImage.addAction(Actions.sequence(
                     Actions.alpha(0f),
@@ -69,7 +69,7 @@ public final class DeviceGroup extends WidgetGroup {
 
         button.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 getStage().addActor(blackImage);
                 blackImage.addAction(Actions.sequence(
                     Actions.alpha(0f),
@@ -120,7 +120,7 @@ public final class DeviceGroup extends WidgetGroup {
         pauseImage = new Image(game.getSkin(), "pause");
         refreshButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.playWifiOnSound();
                 wifiImage.setDrawable(game.getSkin(), "wifi");
                 refreshButton.setVisible(false);

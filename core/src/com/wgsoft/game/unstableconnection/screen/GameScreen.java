@@ -77,7 +77,7 @@ public final class GameScreen extends ScreenAdapter {
         timeLabel.setAlignment(Align.bottom | Align.center);
         timeLabel.addAction(Actions.forever(new Action() {
             @Override
-            public boolean act(float delta) {
+            public boolean act(final float delta) {
                 time -= delta;
                 if(time >= 0f) {
                     int minutes = (int)time / 60;
@@ -95,7 +95,7 @@ public final class GameScreen extends ScreenAdapter {
         pauseButton.setBounds(0f, 0f, 8f, 8f);
         pauseButton.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 game.setPauseScreen();
             }
         });
@@ -148,7 +148,7 @@ public final class GameScreen extends ScreenAdapter {
         })));
         checkBox.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void changed(final ChangeEvent event, final Actor actor) {
                 group.power = checkBox.isChecked();
                 if(checkBox.isChecked()) {
                     game.playLeverOnSound();
@@ -160,7 +160,7 @@ public final class GameScreen extends ScreenAdapter {
         return checkBox;
     }
 
-    private String fixTwo(int number) {
+    private String fixTwo(final int number) {
         if(number == 0) {
             return "00";
         } else if(number < 10) {
@@ -205,7 +205,7 @@ public final class GameScreen extends ScreenAdapter {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(final int width, final int height) {
         stage.getViewport().update(width, height, true);
     }
 
